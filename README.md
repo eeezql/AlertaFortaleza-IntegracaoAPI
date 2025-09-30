@@ -20,7 +20,30 @@ A API atua como um *middleware* que recebe dados em tempo real (via MQTT) dos se
 
 A arquitetura se baseia em um **Design Orientado a Eventos** (para dados MQTT) e **Microsserviços** (para a API REST).
 
-**Infelizmente não consegui concluir o diagrama.**
+### Diagrama de Arquitetura
+
+O diagrama a seguir ilustra o fluxo de dados do sensor à notificação, passando pela API de Integração:
+
+```mermaid
+graph TD
+    subgraph Entrada de Dados
+        A[Sensores Pluviométricos/IoT]
+    end
+
+    subgraph API de Integração (Seu Projeto - Middleware)
+        B{Receptor MQTT} --> C[Lógica de Processamento e Alerta]
+        C --> D[Endpoints REST/HTTP]
+    end
+
+    subgraph Consumo de Alerta
+        E[Sistema Defesa Civil]
+        F[Aplicativo de Notificação ao Morador]
+    end
+
+    A -- Publica Dados em Tempo Real (MQTT) --> B
+    D -- 1. Envio de Alerta (POST REST) --> E
+    D -- 2. Envio de Notificação (POST REST) --> F
+    E -- 3. Consulta de Status (GET REST) --> D
 
 ### Protocolos de Comunicação:
 
@@ -29,10 +52,27 @@ A arquitetura se baseia em um **Design Orientado a Eventos** (para dados MQTT) e
 
 ## 4. Instruções Detalhadas para Execução (Postman/Insomnia) 
 
-Para testar a API localmente, siga os passos abaixo:
-
-1.  **Infelizmente não consegui concluir a estruturação de pastas obrigatorias nem o "architecture.md":**
-   
+1.  **Clone o Repositório:**
+    ```bash
+    git clone [SEU LINK DO REPOSITÓRIO]
+    cd [NOME_DO_PROJETO]
+    ```
+2.  **Instale as Dependências:**
+    ```bash
+    # Exemplo para Node.js:
+    npm install
+    # Exemplo para Python:
+    pip install -r requirements.txt
+    ```
+3.  **Execute a API:**
+    ```bash
+    # Comando para iniciar o servidor, ex:
+    npm start
+    ```
+4.  **Importe a Coleção:**
+    * Abra o Postman/Insomnia.
+    * [cite_start]Importe o arquivo **`postman/collection.json`**[cite: 81].
+    * A coleção contém exemplos de requisições para todos os endpoints documentados na Seção 5.
 
 ## 5. Documentação das Rotas da API [cite: 80]
 
