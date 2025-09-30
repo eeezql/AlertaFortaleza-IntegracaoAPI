@@ -24,7 +24,6 @@ A arquitetura se baseia em um **Design Orientado a Eventos** (para dados MQTT) e
 
 O diagrama a seguir ilustra o fluxo de dados do sensor à notificação, passando pela API de Integração:
 
-```mermaid
 graph TD
     subgraph Entrada de Dados
         A[Sensores Pluviométricos/IoT]
